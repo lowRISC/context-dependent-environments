@@ -6,10 +6,6 @@ name := "cde"
 
 scalaVersion := "2.11.6"
 
-site.settings
-
-site.includeScaladoc()
-
-ghpages.settings
-
-git.remoteRepo := "git@github.com:ucb-bar/context-dependent-environments.git"
+// Provide a managed dependency on chisel if -DchiselVersion="" issupplied on the command line.
+libraryDependencies ++= (Seq("chisel").map {
+  dep: String => sys.props.get(dep + "Version") map { "edu.berkeley.cs" %% dep % _ }}).flatten
